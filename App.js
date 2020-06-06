@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import  Header  from './src/components/Header';
 import axios from 'axios';
 import  PeopleList  from './src/components/PeopleList';
