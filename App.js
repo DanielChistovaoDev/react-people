@@ -1,6 +1,7 @@
 import PeoplePage from './src/pages/PeoplePage';
 import { createAppContainer} from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import PeopleDetailPage from './src/pages/PeopleDetailPage';
 
 const stackNavigator = createStackNavigator({
   'Main': {
@@ -20,6 +21,12 @@ const stackNavigator = createStackNavigator({
         textAlign: 'center'
       }
 
+    }
+  },
+  'PeopleDetail': {
+    screen: PeopleDetailPage,
+    navigationOptions: {
+      title:'Detalhe'
     }
   }
 

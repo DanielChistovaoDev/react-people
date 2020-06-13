@@ -5,10 +5,12 @@ import PeopleListItem from './PeopleListItem'
 
 const PeopleList = props => { 
 
-  const textElements = props.peoples.map( (people, index) => { 
+  const {peoples, onPressItem} = props;
+
+  const textElements = peoples.map( (people, index) => { 
                 
                 return ( 
-                          <PeopleListItem people={people} key={index}></PeopleListItem>
+                          <PeopleListItem people={people} key={index} navigateToPeopleDetail={onPressItem}></PeopleListItem>
                        );
   
               });

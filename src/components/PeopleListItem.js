@@ -4,13 +4,13 @@ import { capitalizeFirstLetter } from '../util/'
 
 const PeopleListItem =props =>{
 
-    const {people} = props;
+    const {people, navigateToPeopleDetail } = props;
     const {title, first, last} = people.name;
     const imgUri = people.picture.thumbnail;
 
     return (
         
-        <TouchableOpacity >
+        <TouchableOpacity onPress={ ()=> { navigateToPeopleDetail()} }>
 
             <View  style={styles.line}>
                 <Image style={styles.avatar} source={{uri: imgUri }}/>
