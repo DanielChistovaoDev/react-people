@@ -15,7 +15,7 @@ export default class PeoplePage extends React.Component{
 
   componentDidMount(){
 
-    const urlApi = 'https://randomuser.me/api/?nat=br&results=5';
+    const urlApi = 'https://randomuser.me/api/?nat=br&results=150';
 
     /*Promises*/
     axios.get(urlApi).then(response => {

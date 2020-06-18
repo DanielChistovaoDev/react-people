@@ -2,6 +2,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import PeopleListItem from './PeopleListItem'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const PeopleList = props => { 
 
@@ -10,16 +11,20 @@ const PeopleList = props => {
   const textElements = peoples.map( (people, index) => { 
                 
                 return ( 
-                          <PeopleListItem people={people} key={index} navigateToPeopleDetail={onPressItem}></PeopleListItem>
+                          <PeopleListItem people={people} 
+                                          key={index} 
+                                          navigateToPeopleDetail={onPressItem}>
+
+                          </PeopleListItem>
                        );
   
               });
 
  
   return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
              { textElements }
-        </View>
+        </ScrollView>
     )
 };
 
