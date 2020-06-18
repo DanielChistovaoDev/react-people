@@ -6,31 +6,41 @@ import PeopleDetailPage from './src/pages/PeopleDetailPage';
 const stackNavigator = createStackNavigator({
   'Main': {
     screen: PeoplePage,
-    navigationOptions: {
-      title:'Pessoas!',
-      headerStyle: {
-        backgroundColor: '#3074e3',
-        borderBottomWidth: 1,
-        borderBottomColor: '#C5C5C5'
-      },
-      headerTitleStyle: {
-        color: 'white',
-        fontSize: 30,
-
-        flexGrow: 1,
-        textAlign: 'center'
-      }
-
-    }
   },
   'PeopleDetail': {
     screen: PeopleDetailPage,
-    navigationOptions: {
-      title:'Detalhe'
+    navigationOptions: ({navigation}) => {
+      const peopleName = navigation.state.params.people.name.first;
+      return ({
+        title: peopleName,
+        headerTitleStyle: {
+          color: 'white',
+          fontSize: 30,
+        },
+      })
     }
+  },
+
+
+}, {
+  defaultNavigationOptions: {
+    title: 'Pessoas!',
+    headerTintColor: 'white',
+    headerStyle: {
+        backgroundColor: '#2acccc',
+        borderWidth: 1,
+        borderBottomColor: 'white',
+    },
+    headerTitleStyle: {
+        color: 'white',
+        fontSize: 30,
+        textAlign: 'center',
+    },
+  },
+
   }
 
-});
+);
 
 const AppContainer = createAppContainer(stackNavigator);
 
