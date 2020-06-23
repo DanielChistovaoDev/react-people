@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Text} from 'react-native';
 import axios from 'axios';
 import  PeopleList  from '../components/PeopleList';
+import { AntDesign } from '@expo/vector-icons';
 
 export default class PeoplePage extends React.Component{
 
@@ -10,7 +11,9 @@ export default class PeoplePage extends React.Component{
   
     this.state = {
       peoples: [],
-      loading: false
+      loading: false,
+      error: false,
+      errorMesage: null
     };
   }
 
@@ -31,25 +34,38 @@ export default class PeoplePage extends React.Component{
         this.setState({loading: false});
       }).catch(err => {
         console.log('erro =>', err);
-        this.setState({loading: false});
+        this.setState({loading: false, error: true, errorMesage: err});
       })
       
-    }, 1500);
+    }, 500);
   
   
   }
 
+  renderParge() {
+
+    if ( this.state.loading )
+      return <ActivityIndicator size='large' color='#3074e3'/>
+    if ( this.state.error)
+      return (
+                <View >
+                  <AntDesign name="exclamationcircleo" style={styles.icon} size={50} /> 
+                  <Text style={styles.error}> Ops... ocorreu um problema!  </Text>
+                  <Text style={styles.error}> {  `${ this.state.errorMesage}` } </Text>
+
+                </View>
+              )
+    
+    return <PeopleList peoples={this.state.peoples}
+                onPressItem={ (pageParams)=> { this.props.navigation.navigate('PeopleDetail', pageParams) } } />
+  }
+
   render() {
-    // this.props.navigation.navigate('PeopleDetail');
+
     return (
-      <View >
+      <View style={styles.container} >
 
-        <ActivityIndicator size='large' color='#3074e3'>
-
-        </ActivityIndicator>
-
-        <PeopleList peoples={this.state.peoples}
-                    onPressItem={ (pageParams)=> { this.props.navigation.navigate('PeopleDetail', pageParams) } } />
+        {  this.renderParge() }  
 
       </View>
     );
@@ -57,4 +73,21 @@ export default class PeoplePage extends React.Component{
 
 }
 
+const styles = StyleSheet.create({
+   container: {
+     flex: 1,
+     justifyContent: 'center',
+   },
+   error: {
+    color: 'red',
+    alignSelf: 'center',
+    fontSize: 18
+  },
+  icon: {
+    fontSize: 100,
+    color: 'red',
+    alignSelf: 'center',
+    marginBottom: 10
+  }
+});
 
